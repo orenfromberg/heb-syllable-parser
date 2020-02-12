@@ -4,24 +4,24 @@ const is_hebrew_letter = (letter) => {
 }
 
 const split = (word) => {
-    let syllables = []
-    let syllable = ""
+    let parts = []
+    let chunk = ""
     let isFirstLetter = true;
     word.split("").forEach(el => {
         if (isFirstLetter) {
-            syllable += el;
+            chunk += el;
             isFirstLetter = false;
         } else {
             if (is_hebrew_letter(el)) {
-                syllables.push(syllable);
-                syllable = el;
+                parts.push(chunk);
+                chunk = el;
             } else {
-                syllable += el;
+                chunk += el;
             }
         }
     });
-    syllables.push(syllable);
-    return syllables;
+    parts.push(chunk);
+    return parts;
 }
 
 module.exports = {
