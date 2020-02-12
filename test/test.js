@@ -23,6 +23,10 @@ describe('split()', function () {
         {
             input: "שָׁלוֹם",
             output: ["שָׁ","ל","וֹ","ם"]
+        },
+        {
+            input: "יְרוּשָׁלַיִם",
+            output: ["יְ","ר","וּ","שָׁ","לַ","יִ","ם"]
         }
     ]
     tests.forEach((test) => {
