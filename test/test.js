@@ -1,5 +1,10 @@
-var assert = require('assert');
-const { is_hebrew_letter, split } = require('../index.js')
+const assert = require('assert');
+const { 
+    is_hebrew_letter, 
+    split, 
+    syllablize 
+} = require('../index.js')
+
 describe('is_hebrew_letter()', function() {
     const tests = [
         {
@@ -33,6 +38,10 @@ describe('split()', function () {
             output: ["הַ","שָּׁ","מַ","יִ","ם"]
         },
         {
+            input: "וַיַּבְדֵּל",
+            output: ["וַ","יַּ","בְ","דֵּ","ל"]
+        },
+        {
             input: "בּרֵאשִׁית",
             output: ["בּ","רֵ","א","שִׁ","י","ת"]
         }
@@ -40,6 +49,36 @@ describe('split()', function () {
     tests.forEach((test) => {
         it(`should split "${test.input}" correctly`, function () {
             assert.equal(JSON.stringify(split(test.input)), JSON.stringify(test.output));
+        });
+    })
+});
+
+describe('syllablize()', function () {
+    const tests = [
+        {
+            input: "שָׁלוֹם",
+            output: ["שָׁ","לוֹם"]
+        },
+        {
+            input: "יְרוּשָׁלַיִם",
+            output: ["יְ","רוּ",,"שָׁ","לַ","יִם",]
+        },
+        {
+            input: "הַשָּׁמַיִם",
+            output: ["הַ","שָּׁ","מַ","יִם"]
+        },
+        {
+            input: "וַיַּבְדֵּל",
+            output: ["וַ","יַּבְ","דֵּל"]
+        },
+        {
+            input: "בּרֵאשִׁית",
+            output: ["בּ","רֵא","שִׁית"]
+        }
+    ]
+    tests.forEach((test) => {
+        it(`should syllablize "${test.input}" correctly`, function () {
+            assert.equal(JSON.stringify(syllablize(test.input)), JSON.stringify(test.output));
         });
     })
 });

@@ -24,7 +24,30 @@ const split = (word) => {
     return parts;
 }
 
+const syllablize = (word) => {
+    let parts = split(word);
+    let is_first_part = true;
+    let syllable = "";
+    let syllables = [];
+    parts.forEach(part => {
+        if (is_first_part) {
+            syllable += part;
+            is_first_part = false;
+        } else {
+            // if there is a shva then it's the end of a syllable
+            if (part.includes("ְ")) {
+                syllable += part;
+                syllables.push(syllable);
+                syllable = ""
+            }
+        }
+    })
+
+    return syllables;
+}
+
 module.exports = {
     is_hebrew_letter,
-    split
+    split,
+    syllablize
 }
